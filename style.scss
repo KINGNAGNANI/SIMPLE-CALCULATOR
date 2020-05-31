@@ -1,0 +1,155 @@
+$top-color: #4C4C4C;
+$number-color: #E0E0E0;
+$number-color-dark: #D6D6D6;
+$operator-color: #FF8E02;
+$border-color: #9F9F9F;
+@mixin btn($color) {
+  width: 57px;
+  height: 47px;
+  background-color: $color;
+}
+
+html {
+  background: url("../background.jpg") no-repeat center fixed;
+  background-size: cover;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.btn-number {
+  @include btn($number-color);
+}
+
+.btn-number-dark {
+  @include btn($number-color-dark);
+}
+
+.btn-operator {
+  @include btn($operator-color);
+  color: white;
+}
+
+.cell {
+  display: table-cell;
+  padding: 0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $border-color;
+}
+
+.container {
+  width: 230px;
+  height: 319px;
+  margin: 150px auto;
+  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.54);
+}
+
+.row {
+  display: table-row;
+}
+
+
+/*
+* This bug: https://bugs.webkit.org/show_bug.cgi?id=78215
+* "Inset box-shadow on a table cell with collapsed borders has a 1px gap",
+* Makes a box-shadow solution unusable.
+* I am using an adaptation from the pseudo-element solution found here:
+* https://css-tricks.com/snippets/css/multiple-borders/
+*/
+
+.selected-operator {
+  position: relative;
+}
+
+.selected-operator::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-top: solid 1px $border-color;
+  border-bottom: solid 1px $border-color;
+  border-left: solid 1px $border-color;
+}
+
+.selected-operator--divide {
+  position: relative;
+}
+
+.selected-operator--divide::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-bottom: solid 1px $border-color;
+  border-left: solid 1px $border-color;
+}
+
+//special classes for text size in screen
+.small {
+  font-size: 36px !important;
+  padding: 40px 10px 0 0 !important;
+}
+
+.smaller {
+  font-size: 24px !important;
+  padding: 50px 10px 0 0 !important;
+}
+
+.smallest {
+  font-size: 16px !important;
+  padding: 55px 10px 0 0 !important;
+}
+
+.table {
+  display: table;
+  border-collapse: collapse;
+  border-style: hidden;
+  text-align: center;
+  font-size: 18px;
+  line-height: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  p {
+    margin-top: 24px;
+  }
+}
+
+.table:hover {
+  cursor: pointer;
+}
+
+#empty {
+  border-left-width: 0;
+}
+
+#equal {
+  border-radius: 0 0 4px 0;
+}
+
+#top {
+  height: 80px;
+  width: 230px;
+  background-color: $top-color;
+  border-radius: 4px 4px 0 0;
+  opacity: 0.9;
+  color: white;
+  text-align: right;
+  p {
+    padding: 25px 15px 0 0;
+    font-size: 48px;
+    font-weight: 100;
+  }
+}
+
+#zero {
+  border-radius: 0 0 0 4px;
+  border-right-width: 0;
+}
